@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react'
 import Counter from './Counter'
 
+const TextComponent = React.lazy(() => import('./AsyncText'))
 class App extends Component {
   render() {
     return (
-      <Counter />
-    );
+      <>
+        <Counter />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TextComponent />
+        </Suspense>
+      </>
+    )
   }
 }
 
-export default App;
+export default App
